@@ -158,11 +158,37 @@ var base64toBlob = function(base64Data, contentType) {
     return new Blob(byteArrays, { type: contentType });
 }
 
-var updateExifHtml = function (values) {
-  // TODO: displaying ALL values. Most likely will need just a few.
+var updateExifHtmlAll = function (values) {
+  //displaying ALL values. Deprecated, needed for debugging purposes
   var exifTable = document.getElementById("exifTable");
   for (var key in values) {
     if(values.hasOwnProperty(key)) {
+      var cell1 = document.createElement("td");
+      var cell2 = document.createElement("td");
+      var row = document.createElement("tr");
+      cell1.appendChild(document.createTextNode(key));
+      cell2.appendChild(document.createTextNode(values[key]))
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      exifTable.appendChild(row);
+    }
+  }
+}
+
+var updateExifHtml = function (values) {
+  // TODO: displaying ALL values. Most likely will need just a few.
+  var exifTable = document.getElementById("exifTable");
+  var keys = [
+    "Error",
+    "GPSLatitude",
+    "GPSLongitude",
+    "GPSLatitudeRef",
+    "GPSLongitudeRef",
+    "DateTimeOriginal",
+    "Orientation"
+  ];
+  for (var key in values) {
+    if(values.hasOwnProperty(key) && (keys.indexOf(key) > -1)) {
       var cell1 = document.createElement("td");
       var cell2 = document.createElement("td");
       var row = document.createElement("tr");
