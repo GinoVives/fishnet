@@ -1,0 +1,116 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    margin:0px;
+    padding:0px;
+    height:100%;
+    width:100%;
+    /* To be tuned
+    min-width: 360px;
+    min-height: 480px;
+    */
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    text-transform:uppercase;
+}
+
+ul.sidewaysList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidewaysList li{
+  display: inline;
+  padding: .2em .1em;
+}
+
+.app {
+  background:url(../img/logo.png) no-repeat left top; /* 170px x 200px */
+  position:absolute;             /* position in the center of the screen */
+  text-align:left;
+}
+/*******************************
+*
+* ORIENTATION SPECIFIC
+*
+*******************************/
+
+/* Portrait layout (default) */
+.app {
+    background-size: 60px 60px;
+    padding: 30px 0px 0px 5px;
+    margin: auto;
+}
+
+.appName {
+  padding-top: -125px;
+  padding-left: 65px;
+}
+
+/* map.html specific, should remove
+#map {
+  min-height: 400px;
+  width: 95%;
+  margin: auto;
+}
+*/
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-size: 30px 30px;
+        padding:0px 0px 0px 5px;  /* padding-top + padding-bottom + text area = image height */
+        margin:15px 0px 0px 0px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+
+    .appName {
+      padding-top: 0px;
+      padding-left: 25px;
+    }
+}
