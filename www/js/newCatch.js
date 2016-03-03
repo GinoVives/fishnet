@@ -29,6 +29,7 @@ var app = {
 
    // Internal variables
    isReady: false,
+   map: new Object(),
 
    // Event handling
    bindEvents: function() {
@@ -86,7 +87,16 @@ var app = {
        // At least! We can ask for the fkn picture:
        navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
      }
-   } // importPicture
+   }, // importPicture
+   initMap: function() {
+     map = new google.maps.Map(document.getElementById('map'), {
+       center: {lat: -33.457521, lng: -70.662246},
+       scrollwheel: false,
+       // Apply the map style array to the map.
+       styles: mapStyle,
+       zoom: 15
+     });
+   } // initMap
 }; // app
 
 var cameraSuccessString64 = function(imageString){
@@ -133,7 +143,9 @@ var parseSuccess = function (data) {
     // Image exists, but no exif?!
     exif["Error"] = ["Image found, empty exif"];
   }
+  updateThumbnailHtml(data.exif.get('Thumbnail'), data.exif.get('Orientation'));
   updateExifHtml(exif);
+  updateMapHtml(exif);
 };
 
 // Does exactly what the name inplies. Found online.
@@ -176,7 +188,6 @@ var updateExifHtmlAll = function (values) {
 }
 
 var updateExifHtml = function (values) {
-  // TODO: displaying ALL values. Most likely will need just a few.
   var exifTable = document.getElementById("exifTable");
   var keys = [
     "Error",
@@ -201,8 +212,74 @@ var updateExifHtml = function (values) {
   }
 }
 
+var updateThumbnailHtml = function (thumb, orientation) {
+  var thumbNode = document.getElementById("imgTable");
+  if (thumb) {
+    loadImage(thumb, function (img) {
+      var cell = document.createElement("td");
+      var row = document.createElement("tr");
+      cell.appendChild(img)
+      row.appendChild(cell);
+      thumbNode.appendChild(row);
+    },
+    {orientation: orientation});
+  } else {
+    var cell = document.createElement("td");
+    cell.appendChild(document.createTextNode("No thumbnail available"));
+    var row = document.createElement("tr");
+    row.appendChild(cell);
+    thumbNode.appendChild(row);
+  }
+}
 
-/* To Be Used
-* pos.lat = data.exif.get('GPSLatitude');
-* pos.lng = data.exif.get('GPSLongitude');
-*/
+var updateMapHtml = function (values) {
+  var lat = coordTransform(values.GPSLatitude, values.GPSLatitudeRef);
+  var lng = coordTransform(values.GPSLongitude, values.GPSLongitudeRef);
+  var newLoc = new google.maps.LatLng(lat, lng);
+  map.setCenter(newLoc);
+  document.getElementById("map").style.display = "block";
+}
+
+var coordTransform = function (coord, coordRef) {
+  var r = 0;
+  var values = coord.split(",");
+  r = values[0] + values[1]/60 + values[2]/3600;
+  if (coordRef === "S" || coordRef === "W")
+    r *= -1;
+  return r;
+}
+
+var mapStyle = [
+  {
+    "elementType": "geometry.fill",
+    "stylers": [
+      { "gamma": 2.0 }
+    ]
+  },{
+    "featureType": "administrative",
+    "stylers": [
+      { "visibility": "simplified" }
+    ]
+  },{
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi.park",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "water",
+    "stylers": [
+      { "gamma": 0.3 }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      { "hue": "#ff0033" }
+    ]
+  }
+];
