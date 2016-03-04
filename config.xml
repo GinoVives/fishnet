@@ -36,8 +36,8 @@
   <!-- PLUGINS -->
   <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.file"/>
-  <!-- commenting out most of plugins until needed
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <!-- commenting out most of plugins until needed
   <gap:plugin name="org.apache.cordova.media-capture"/>
   <gap:plugin name="org.apache.cordova.console"/>
   <gap:plugin name="org.apache.cordova.contacts"/>
@@ -83,10 +83,21 @@
   <gap:splash src="www/res/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768"/>
   <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   -->
-  <access origin="*"/>
+
+
+  <!-- Google Maps access, for whitelist purposes -->
+  <!-- removing this one, added by default: <access origin="*"/> -->
+  <access origin="*.google.com" />
+  <access origin="*.googleapis.com" />
+  <access origin="*.gstatic.com" />
+  <access origin="*.googleusercontent.com" />
+  <access origin="google.com" subdomains="true"/>
+  <access origin="googleapis.com" subdomains="true"/>
+  <access origin="gstatic.com" subdomains="true"/>
+  <access origin="googleusercontent.com" subdomains="true"/>
+
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
-
   <!-- Intents going out of the app
   <allow-intent href="tel:*"/>
   <allow-intent href="sms:*"/>

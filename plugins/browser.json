@@ -12,6 +12,9 @@
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "org.vapp.mobile.fishnet"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "org.vapp.mobile.fishnet"
         }
     },
     "dependent_plugins": {}

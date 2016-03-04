@@ -89,12 +89,13 @@ var app = {
      }
    }, // importPicture
    initMap: function() {
+
      map = new google.maps.Map(document.getElementById('map'), {
        center: {lat: -33.457521, lng: -70.662246},
        scrollwheel: false,
        // Apply the map style array to the map.
        styles: mapStyle,
-       zoom: 15
+       zoom: 3
      });
    } // initMap
 }; // app
@@ -232,18 +233,21 @@ var updateThumbnailHtml = function (thumb, orientation) {
   }
 }
 
+// TODO: I couldn´t make the map div to be invisible and then turn it visible once the coords were loaded.
+// The problem has something to do with doing initMap on a invisible div
 var updateMapHtml = function (values) {
   var lat = coordTransform(values.GPSLatitude, values.GPSLatitudeRef);
   var lng = coordTransform(values.GPSLongitude, values.GPSLongitudeRef);
   var newLoc = new google.maps.LatLng(lat, lng);
   map.setCenter(newLoc);
-  document.getElementById("map").style.display = "block";
+  map.setZoom(16);
 }
 
+// TODO: gracefully accept invalid values
 var coordTransform = function (coord, coordRef) {
   var r = 0;
   var values = coord.split(",");
-  r = values[0] + values[1]/60 + values[2]/3600;
+  r = parseInt(values[0]) + values[1]/60 + values[2]/3600;
   if (coordRef === "S" || coordRef === "W")
     r *= -1;
   return r;
