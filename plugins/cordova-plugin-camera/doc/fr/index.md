@@ -43,7 +43,7 @@ Prend une photo à l'aide de la caméra, ou récupère une photo de la Galerie d
 
 Le `camera.getPicture` fonction ouvre l'application de caméra par défaut de l'appareil qui permet aux utilisateurs de prendre des photos. Ce comportement se produit par défaut, lorsque `Camera.sourceType` est égal à `Camera.PictureSourceType.CAMERA` . Une fois que l'utilisateur s'enclenche la photo, l'application appareil photo se ferme et l'application est restaurée.
 
-Si `Camera.sourceType` est `Camera.PictureSourceType.PHOTOLIBRARY` ou `Camera.PictureSourceType.SAVEDPHOTOALBUM` , puis un dialogue affiche qui permet aux utilisateurs de sélectionner une image existante. Le `camera.getPicture` retourne un `CameraPopoverHandle` objet, ce qui permet de repositionner le dialogue de sélection d'image, par exemple, lorsque l'orientation de l'appareil change.
+Si `Camera.sourceType` est `Camera.PictureSourceType.PHOTOLIBRARY` ou `Camera.PictureSourceType.SAVEDPHOTOALBUM` , puis un dialogue affiche qui permet aux utilisateurs de sélectionner une image existante. Le `camera.getPicture` retourne un `CameraPopoverHandle` objet, ce qui permet de repositionner le dialogue de sélection d'image, par example, lorsque l'orientation de l'appareil change.
 
 La valeur de retour est envoyée à la `cameraSuccess` la fonction de rappel, dans l'un des formats suivants, selon les `cameraOptions` :
 
@@ -51,9 +51,9 @@ La valeur de retour est envoyée à la `cameraSuccess` la fonction de rappel, da
 
 *   A `String` qui représente l'emplacement du fichier image sur le stockage local (par défaut).
 
-Vous pouvez faire ce que vous voulez avec l'image codée ou URI, par exemple :
+Vous pouvez faire ce que vous voulez avec l'image codée ou URI, par example :
 
-*   Afficher l'image dans un `<img>` tag, comme dans l'exemple ci-dessous
+*   Afficher l'image dans un `<img>` tag, comme dans l'example ci-dessous
 
 *   Enregistrer les données localement ( `LocalStorage` , [poids][1], etc..)
 
@@ -115,7 +115,7 @@ Invoquant l'application native caméra alors que l'appareil est connecté via Zu
 
 Paciarelli prend uniquement en charge un `destinationType` de `Camera.DestinationType.FILE_URI` et un `sourceType` de`Camera.PictureSourceType.PHOTOLIBRARY`.
 
-### Exemple
+### Example
 
 Prendre une photo, puis extrayez-la comme une image codée en base64 :
 
@@ -301,7 +301,7 @@ fonction de rappel onSuccess qui fournit les données d'image.
 
 *   **imageData**: codage Base64 de l'image, *ou* le fichier image URI, selon `cameraOptions` en vigueur. *(String)*
 
-### Exemple
+### Example
 
     Afficher image / / function cameraCallback(imageData) {var image = document.getElementById('myImage') ;
         image.src = "données : image / jpeg ; base64," + imageData;}
@@ -327,7 +327,7 @@ Définir la position de la kangourou.
 
 *   `cameraPopoverOptions`: la `CameraPopoverOptions` qui spécifie la nouvelle position
 
-### Exemple
+### Example
 
      var cameraPopoverHandle = navigator.camera.getPicture (onSuccess, onFail, {destinationType : Camera.DestinationType.FILE_URI, TypeSource : Camera.PictureSourceType.PHOTOLIBRARY, popoverOptions : nouvelle CameraPopoverOptions (300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY)}) ;
     
@@ -382,7 +382,7 @@ Supprime les intermédiaires les fichiers image qui sont gardées en dépôt tem
 
 *   iOS
 
-### Exemple
+### Example
 
     Navigator.Camera.Cleanup (onSuccess, onFail) ;
     

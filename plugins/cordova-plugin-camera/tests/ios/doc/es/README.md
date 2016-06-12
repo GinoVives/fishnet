@@ -34,6 +34,6 @@ Primero instalar cordova-ios:
   2. Elija "CDVCameraLibTests" en el menú de lista desplegable esquema
   3. Haga clic y mantenga el botón de `Play` y elegir el icono de `llave inglesa` para ejecutar las pruebas
 
-# Pruebas desde la línea de comandos
+# Pruebas desde la línea de commandos
 
     npm test
