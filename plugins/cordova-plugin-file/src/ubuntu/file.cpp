@@ -236,7 +236,7 @@ void File::getFile(int scId, int ecId, const QString &parentPath, const QString 
         file.open(QIODevice::WriteOnly);
         file.close();
 
-        // Check if creation was successfull
+        // Check if creation was successful
         if (!file.exists()) {
             this->callback(ecId, FileError::kNoModificationAllowedErr);
             return;
